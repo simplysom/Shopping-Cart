@@ -1,0 +1,10 @@
+.thumbnail{
+  max-height: 150 px;
+}
+.thumbnail.decription{
+  columns: #7f7f7f;
+}
+.price{
+  font-weight: bold;
+  font-size: 16px;
+}
