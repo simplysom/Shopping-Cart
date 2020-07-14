@@ -5,8 +5,12 @@ var Handlebars = require('handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var session=require("express-session");
 var logger = require('morgan');
 var mongoose=require("mongoose");
+var passport=require("passport");
+var flash=require("connect-flash");
+var validator=require("express-validator");
 var indexRouter = require('./routes/index');
 
 
@@ -15,6 +19,7 @@ var app = express();
 //Connecting to mongo db
 mongoose.connect("mongodb+srv://som:som12345@cluster0.udaht.mongodb.net/<dbname>?retryWrites=true&w=majority",{useNewUrlParser:true});
 db=mongoose.connection;
+require("./config/passport");
 
 
 // view engine setup
@@ -25,7 +30,12 @@ app.set('view engine', '.hbs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(validator());
 app.use(cookieParser());
+app.use(session({secret:'mysupersecret',resave:false,saveUninitialized:false}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
