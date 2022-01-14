@@ -1,4 +1,4 @@
-#Shopping-Cart
+# Shopping-Cart
 
 An ecommerce website.It has all the functionalities of a normal e-commerce store.Moreover I have integrated the Stripe API to make online payments possible.
 
